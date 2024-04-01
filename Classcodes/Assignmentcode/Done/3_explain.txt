@@ -1,0 +1,50 @@
+/* Task: Write a C program to add two polynomials using doubly linked list.
+    *  
+    * The program should have the following functions:
+    * 1. void printList(struct node*, const char*) - This function should print the polynomial list.
+    * 2. void LIST_APPEND(struct node**, int, int) - This function should append a new node to the polynomial list.
+    * 3. struct node *createNode(int, int) - This function should create a new node with given coefficient and degree.
+    * 4. struct node *addPolynomials(struct node*, struct node*) - This function should add two polynomials and return the resulting polynomial.
+    * 
+    * The program should have the following structure:
+    * 1. Include the necessary header files.
+    * 2. Define a structure for a doubly linked list node.
+    * 3. Implement the function printList(struct node*, const char*).
+    * 4. Implement the function createNode(int, int).
+    * 5. Implement the function LIST_APPEND(struct node**, int, int).
+    * 6. Implement the function addPolynomials(struct node*, struct node*).
+    * 7. In the main() function:
+    *    a. Create the first polynomial list.
+    *    b. Print the first polynomial list.
+    *    c. Create the second polynomial list.
+    *    d. Print the second polynomial list.
+    *    e. Add the two polynomials and store the result in a new list.
+    *    f. Print the resulting polynomial list.
+    * 8. Return 0 from the main() function.
+    * 
+    * The program should be implemented using dynamic memory allocation.
+    * 
+    * The program should be implemented in a file named 03_DLL_PolynomialAddition.c.
+    * 
+    * The program should be implemented using doubly linked list.
+    * 
+    * The program should be implemented in a function named addPolynomials.
+    * 
+    * The program should be implemented using the following structure:
+    * 
+    * struct node
+    * {
+    *     int coeff;              // Coefficient of the polynomial term
+    *     int degree;             // Degree of the polynomial term
+    *     struct node *prev;      // Pointer to the previous node in the list
+    *     struct node *next;      // Pointer to the next node in the list
+    * };
+    * 
+    * The program should be implemented using the following functions:
+    * 
+    * void printList(struct node*, const char*);
+    * void LIST_APPEND(struct node**, int, int);
+    * struct node *createNode(int, int);
+    * struct node *addPolynomials(struct node*, struct node*);
+*/
+

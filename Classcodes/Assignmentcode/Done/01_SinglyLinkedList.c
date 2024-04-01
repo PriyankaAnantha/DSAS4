@@ -1,4 +1,4 @@
-/* Doubly Linked List */
+/* Singly Linked List */
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -6,7 +6,6 @@
 struct node
 {
   int key;
-  struct node *prev;
   struct node *next;
 };
 
@@ -28,7 +27,7 @@ int main(void)
   char option = '\0';
 
   printf("------------------------\n");
-  printf("---Doubly Linked List---\n");
+  printf("---Singly Linked List---\n");
   printf("Show: S\n");
   printf("LIST-PREPEND: 1\n");
   printf("LIST-APPEND: 2\n");
@@ -120,8 +119,8 @@ void printList()
 
     while (tmpHead != NULL)
     {
-      printf("[%p] ==> %p <-- %d --> %p\n",
-             tmpHead, tmpHead->prev, tmpHead->key, tmpHead->next);
+      printf("[%p] ==> %d --> %p\n",
+             tmpHead, tmpHead->key, tmpHead->next);
       tmpHead = tmpHead->next;
     }
     printf("\n");
@@ -133,11 +132,10 @@ void printList()
 struct node *createNode(int x)
 {
   /* malloc the new node and typecast the address to struct node ptr. */
-  /* Set the key with x, prev and next to NULL */
+  /* Set the key with x and next to NULL */
 
   struct node *newNode = (struct node *)malloc(1 * sizeof(struct node));
   newNode->key = x;
-  newNode->prev = NULL;
   newNode->next = NULL;
 
   return newNode;
@@ -147,22 +145,14 @@ void LIST_PREPEND(int x)
 {
 
   /* Create a new node with the key initialized using the value in x. */
-  /* Since  this node is always going to be the first node, the prev pointer is NULL. */
-  /* The next pointer should be what head pointed to. In an empty list, this is obviously NULL. */
+  /* Since  this node is always going to be the first node, the next pointer is NULL. */
 
   struct node *newNode = createNode(x);
 
-  // newNode->next = ; // Whatever head was pointing to.
-  // newNode->prev = ; // For first node, the prev is always going to be NULL.
+  newNode->next = L_head; // Whatever head was pointing to.
 
   /* Head should now point to the new node. */
-  /* If head already contained a node, then prev of head should be new node before updating the head to new node.*/
-
-  if (L_head != NULL)
-  {
-    // L_head->prev = ; // The first node should now
-  }
-  // L_head = ; // Now head should point to the new node.
+  L_head = newNode; // Now head should point to the new node.
 
   printf("First element: %d\n", L_head->key);
 }
@@ -176,7 +166,7 @@ void LIST_APPEND(int x)
 
   if (L_head == NULL)
   {
-    // L_head = ;
+    L_head = newNode;
     return;
   }
 
@@ -184,14 +174,12 @@ void LIST_APPEND(int x)
   struct node *lastNode = L_head;
   while (lastNode->next != NULL)
   {
-    // lastNode = ;
+    lastNode = lastNode->next;
   }
 
   /* Next pointer of lastNode should point to the new node. */
-  /* Previous pointer of the new node should point to lastNode */
 
-  // lastNode->next = ;
-  // newNode->prev = ;
+  lastNode->next = newNode;
 
   return;
 }
@@ -213,12 +201,10 @@ void LIST_INSERT(int x, int y)
 
   struct node *newNode = createNode(x);
 
-  /* Update prev/next pointer of new node. */
-  // newNode->prev = ;
-  // newNode->next = ;
+  /* Update next pointer of new node. */
+  newNode->next = yNode->next;
 
-  // yNode->next = ;
-  // newNode->next->prev = ;
+  yNode->next = newNode;
 
   return;
 }
@@ -258,19 +244,18 @@ void LIST_DELETE(int y)
   }
 
   /* If it is not the first node */
-  if (yNode->prev != NULL)
+  if (yNode != L_head)
   {
-    //yNode->prev->next = ;
+    struct node *prevNode = L_head;
+    while (prevNode->next != yNode)
+    {
+      prevNode = prevNode->next;
+    }
+    prevNode->next = yNode->next;
   }
   else
   {
     L_head = yNode->next;
-  }
-
-  /* If it is not the last node */
-  if (yNode->next != NULL)
-  {
-    //yNode->next->prev = ;
   }
 
   free(yNode);
