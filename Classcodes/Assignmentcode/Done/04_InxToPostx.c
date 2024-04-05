@@ -1,4 +1,6 @@
 // TEST--> IN--> a+b*(c^d-e)^(f+g*h)-i OUT--> abcd^e-fgh*+^*+i-
+// gcc -o infixtopost 04_InxToPostx.c
+// PS C:\Users\PRIYA\Downloads\S4\DSAS4\Classcodes\Assignmentcode\Done> ./infixtopost   
 
 #include <stdio.h>
 #include <stdlib.h>
