@@ -1,4 +1,5 @@
 /* Circular Queue: Implementation using Arrays */
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -85,26 +86,42 @@ int main(void)
 void display(int Q[])
 {
     /* First check whether the Queue is empty or not */
-    
+    if (isQ_EMPTY())
+    {
+        printf("Queue is empty\n");
+        return;
+    }
 
+    else 
+    {
+        for(int i = Q_head ; i != Q_tail ; i = (i + 1) % Q_size)
+        {
+            printf("%d ", Q[i]);
+        }
 
+        printf("%d\n", Q[Q_tail]);
+    }
+     
     /* If not empty, start printing from head until i!=tail. 
-    Make the increment cyclic, so mod the increment with Q_size. 
+    Make the increment cyclic, so mod (%) the increment with Q_size. 
     Print the tail seperately. */
     
-
-
     return;
 }
 
 void ENQUEUE(int Q[], int x)
 {
     /* Check for overflow */
-    
+    if (isQ_FULL())
+    {
+        printf("Queue is full, overflow\n");
+        return;
+    }
 
 
     /* Increment the tail but preserve the cyclic nature. */
-    
+    Q_tail = (Q_tail + 1) % Q_size;
+    Q[Q_tail] = x;
 
 
     return;
@@ -113,41 +130,46 @@ void ENQUEUE(int Q[], int x)
 void DEQUEUE(int Q[])
 {
     /* Check Underflow */
-    
-
+    if (isQ_EMPTY())
+    {
+        printf("Queue is empty, underflow\n");
+        return;
+    }
 
     /* Remove the item pointed by head, and increment head cyclically. */
-    /* Store the deleted item in another variable val. */
-    
-
-
+    int val = Q[Q_head];
+   
 
     /* If head and tail were same, then there was only one element
      and after deleting, the queue becomes empty.*/
-     /* Otherwise increment the head cyclically */
-    
-
-
-
+    /* Otherwise increment the head cyclically */
+    if (Q_head == Q_tail)
+    {
+        Q_head = -1;
+        Q_tail = -1;
+    }
+    else
+    {
+        Q_head = (Q_head + 1) % Q_size;
+    }
 
     /* Print the value deleted */
-    
-
+    printf("Value deleted: %d\n", val);
 
     return;
-
 }
 
 void PEEK(int Q[])
 {
-    /* Return the next value which will be deleted. */
-    /* This is pointed by head. */
-    /* First check whether the queue is empty. */
-
-    
-
-
-    /* Print the value to delete next. */
+   if (isQ_EMPTY())
+    {
+        printf("Queue is empty\n");
+        return;
+    }
+    else 
+    {
+        printf("Front element: %d\n", Q[Q_head]);
+    }
     
 
 
@@ -160,6 +182,14 @@ int isQ_EMPTY()
     /* Check whether head is -1. 
     Return 1 or 0 based on the condition. */
 
+    if (Q_head == -1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
     
 
 }
@@ -171,6 +201,15 @@ int isQ_FULL()
     /* Check whether the next location to insert collides with head in a cyclic manner. */
     /* (tail + 1) % size == head */
 
-    
+    if ((Q_tail + 1) % Q_size == Q_head)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+
+
 
 }

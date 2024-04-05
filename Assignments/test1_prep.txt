@@ -1,0 +1,37 @@
+Portions- 
+for class test on 05-Apr-2024 are as follows:
+1. Arrays - 1D and 2D representations, memory address for contents.
+2. Stacks and Queues - Both array and linked list implementations.
+
+---> Lecture 1 to 6
+Topics covered in Assignment-01.
+---> 1.  Modify the Doubly Linked List code (DoublyLinkedList.c) provided with this assignment to
+implement a Singly Linked List
+2.  Queue operations implementation using the Singly Linked List implementation
+3.  Using a Doubly Linked List, perform polynomial addition.
+4. converting a given Inx expression to a Postx expression using doubly linked list implementation of stack. 
+
+
+Note: First, be familiar with all the topics discussed in the class and then read the corresponding materials from 
+Introduction to Algorithms (CLRS) textbook. 
+
+_______________________________________________________________________________
+Lecture 1: 
+
+
+
+_______________________________________________________________________________
+Lecture 2: 
+
+Stack Array - Implementation of stacks using Arrays
+
+#include <stdio.h>
+#include <stdlib.h>
+
+1. global variable declarations and function prototypes for various stack operations.
+    1. variables int S_size= 5; stack size, predefined for we are using array in the implementation and array needs to have fixed size and int S_top = -1; top of stack
+
+    2. stack operation Function prototypes declarations
+    
+
+
