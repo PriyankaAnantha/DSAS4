@@ -12,17 +12,97 @@ struct node
 
 struct node *T_root = NULL; // Empty tree
 
+struct node* createNode(int);
+
 void BST_Insert(int);
 void BST_InorderWalk(struct node*);
 
-struct node* createNode(int);
+
 struct node* BST_Minimum(struct node*);
 struct node* BST_Maximum(struct node*);
 struct node* BST_TreeSearch(struct node*, int);
-void BST_Transplant(struct node*, struct node*);
 
+void BST_Transplant(struct node*, struct node*);
 void BST_Delete(struct node*);
+
+
+//****************************************************************************
+struct node* BST_Minimum(struct node *xNode)
+{
+  while(xNode->left != NULL)
+    xNode = xNode->left;
+
+  return xNode;
+}
+
+struct node* BST_Maximum(struct node *xNode)
+{
+  while(xNode->right != NULL)
+    xNode = xNode->right;
+
+  return xNode;
+}
+
+
+struct node* BST_TreeSearch(struct node *xNode, int key)
+{
   
+  while(xNode != NULL && key != xNode->key)
+    {
+      if(key < xNode->key)
+        xNode = xNode->left;
+      else
+        xNode = xNode->right;
+    }
+
+  return xNode;
+  
+}
+
+void BST_Transplant(struct node *u, struct node *v)
+{
+  if(u->parent == NULL)
+    T_root = v;
+  if(u == u->parent->left)
+    u->parent->left = v;
+  else
+    u->parent->right = v;
+
+  if(v != NULL)
+    v->parent = u->parent;
+
+  return;
+}
+
+void BST_Delete(struct node *zNode)
+{
+  if(zNode->left == NULL)
+    BST_Transplant(zNode, zNode->right);
+  else if(zNode->right == NULL)
+    BST_Transplant(zNode, zNode->left);
+  else
+    {
+      struct node *yNode = BST_Minimum(zNode->right);
+
+      if(yNode != zNode->right)
+        {
+          BST_Transplant(yNode, yNode->right);
+          yNode->right = zNode->right;
+          yNode->right->parent = yNode;
+        }
+      BST_Transplant(zNode, yNode);
+      yNode->left = zNode->left;
+      yNode->left->parent = yNode;
+      
+    }
+
+  free(zNode);
+  
+}
+//****************************************************************************
+
+
+
 int main(void)
 {
   BST_Insert(31);
@@ -138,75 +218,4 @@ void BST_InorderWalk(struct node *xNode)
   
 }
 
-struct node* BST_Minimum(struct node *xNode)
-{
-  while(xNode->left != NULL)
-    xNode = xNode->left;
 
-  return xNode;
-}
-
-struct node* BST_Maximum(struct node *xNode)
-{
-  while(xNode->right != NULL)
-    xNode = xNode->right;
-
-  return xNode;
-}
-
-
-struct node* BST_TreeSearch(struct node *xNode, int key)
-{
-  
-  while(xNode != NULL && key != xNode->key)
-    {
-      if(key < xNode->key)
-        xNode = xNode->left;
-      else
-        xNode = xNode->right;
-    }
-
-  return xNode;
-  
-}
-
-void BST_Delete(struct node *zNode)
-{
-  if(zNode->left == NULL)
-    BST_Transplant(zNode, zNode->right);
-  else if(zNode->right == NULL)
-    BST_Transplant(zNode, zNode->left);
-  else
-    {
-      struct node *yNode = BST_Minimum(zNode->right);
-
-      if(yNode != zNode->right)
-        {
-          BST_Transplant(yNode, yNode->right);
-          yNode->right = zNode->right;
-          yNode->right->parent = yNode;
-        }
-      BST_Transplant(zNode, yNode);
-      yNode->left = zNode->left;
-      yNode->left->parent = yNode;
-      
-    }
-
-  free(zNode);
-  
-}
-
-void BST_Transplant(struct node *u, struct node *v)
-{
-  if(u->parent == NULL)
-    T_root = v;
-  if(u == u->parent->left)
-    u->parent->left = v;
-  else
-    u->parent->right = v;
-
-  if(v != NULL)
-    v->parent = u->parent;
-
-  return;
-}
