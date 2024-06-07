@@ -1,0 +1,10 @@
+The end term exam portions for DSA will be as follows:
+
+1. Array based Stack and Queue
+2. Hash Tables 
+3. Asymptotic Notations & Analysis
+4. Binary Searching
+5. Merge Sort, Quick Sort
+
+
+Exam will be for 2 hrs, with a total of 30 marks comprising objective and descriptive type questions. 
